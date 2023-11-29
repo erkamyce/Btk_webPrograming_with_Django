@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.urls import  reverse
 
 data ={
     "programlama":"Programlama kategorisine ait kurslar",
@@ -9,22 +10,11 @@ data ={
 # Create your views here.
 
 # deneme commit
-def home (request):
-    return HttpResponse('Anasayfa')
-def course (request, kurs_detay):
-    return HttpResponse(f"{kurs_detay} detay sayfasi")
+def index (request):
+    return render(request,'index.html')
 
-def getcoursesByCategory(request , category_name ):
-    try:
-        category_text = data[category_name]
-        return HttpResponse(category_text)
-    except:
-        return HttpResponseNotFound("wrong catagory ")
+def about (request):
+    return render(request,'about.html')
 
-def getcoursesByCategoryId (request , category_id ):
-    category_list = list(data.keys())
-    if(category_id > len(category_list)):
-        return HttpResponseNotFound("WRONG CATAGORY")
-    redirect_text = category_list[category_id - 1]
-
-    return redirect('/kurslar/kategori/' + redirect_text)
+def contact (request):
+    return render(request,'contact.html')
